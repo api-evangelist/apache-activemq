@@ -1,0 +1,34 @@
+aid: apache-activemq
+name: Apache ActiveMQ
+description: >-
+  Apache ActiveMQ is an open-source message broker written in Java that implements the Java Message Service (JMS) API. It supports multiple protocols including AMQP, STOMP, MQTT, and OpenWire, enabling reliable asynchronous messaging between distributed applications and microservices.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Messaging
+  - JMS
+  - Message Broker
+  - AMQP
+  - MQTT
+created: '2026-03-16'
+modified: '2026-03-16'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/apache-activemq/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: apache-activemq:apache-activemq-broker
+    name: Apache ActiveMQ Broker
+    description: >-
+      The ActiveMQ broker provides messaging capabilities through multiple protocol interfaces including OpenWire, AMQP, STOMP, and MQTT, with a web console REST API for broker management and monitoring.
+    humanURL: https://activemq.apache.org/components/classic/documentation
+    tags:
+      - Messaging
+      - Broker
+    properties:
+      - type: Documentation
+        url: https://activemq.apache.org/components/classic/documentation
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
