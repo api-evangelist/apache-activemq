@@ -7,10 +7,10 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Messaging
+  - AMQP
   - JMS
   - Message Broker
-  - AMQP
+  - Messaging
   - MQTT
 created: '2026-03-16'
 modified: '2026-03-16'
@@ -24,8 +24,8 @@ apis:
       The ActiveMQ broker provides messaging capabilities through multiple protocol interfaces including OpenWire, AMQP, STOMP, and MQTT, with a web console REST API for broker management and monitoring.
     humanURL: https://activemq.apache.org/components/classic/documentation
     tags:
-      - Messaging
       - Broker
+      - Messaging
     properties:
       - type: Documentation
         url: https://activemq.apache.org/components/classic/documentation
