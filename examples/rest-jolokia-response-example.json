@@ -1,0 +1,10 @@
+{
+  "request": {
+    "type": "read",
+    "mbean": "org.apache.activemq:type=Broker,brokerName=localhost",
+    "attribute": "TotalConsumerCount"
+  },
+  "value": 3,
+  "timestamp": 1718153645,
+  "status": 200
+}

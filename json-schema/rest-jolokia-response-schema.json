@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-activemq/refs/heads/main/json-schema/rest-jolokia-response-schema.json",
+  "title": "JolokiaResponse",
+  "description": "Standard Jolokia response envelope for successful MBean read operations.",
+  "type": "object",
+  "properties": {
+    "request": {
+      "type": "object",
+      "description": "Echo of the original request details.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Jolokia operation type (read, write, exec, search).",
+          "example": "read"
+        },
+        "mbean": {
+          "type": "string",
+          "description": "JMX ObjectName of the target MBean.",
+          "example": "org.apache.activemq:type=Broker,brokerName=localhost"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "Attribute name that was read.",
+          "example": "TotalConsumerCount"
+        }
+      }
+    },
+    "value": {
+      "description": "The attribute value returned. Type varies by attribute.",
+      "example": 3
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Unix timestamp of the response.",
+      "example": 1718153645
+    },
+    "status": {
+      "type": "integer",
+      "description": "HTTP status code of the Jolokia operation.",
+      "example": 200
+    }
+  }
+}

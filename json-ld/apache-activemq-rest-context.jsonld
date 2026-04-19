@@ -1,0 +1,35 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amq": "https://activemq.apache.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "JolokiaResponse": "amq:JolokiaResponse",
+    "request": {
+      "@id": "amq:request",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "amq:value",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "amq:timestamp",
+      "@type": "xsd:integer"
+    },
+    "status": {
+      "@id": "amq:status",
+      "@type": "xsd:integer"
+    },
+    "JolokiaError": "amq:JolokiaError",
+    "errorType": {
+      "@id": "amq:error_type",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "amq:error",
+      "@type": "xsd:string"
+    }
+  }
+}

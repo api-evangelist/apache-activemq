@@ -1,0 +1,136 @@
+vocabulary: 1.0.0
+info:
+  provider: Apache ActiveMQ
+  description: Unified taxonomy for Apache ActiveMQ covering messaging 
+    operations, broker management, protocols, and integration patterns.
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  apis:
+  - name: ActiveMQ REST API
+    namespace: activemq-rest
+    version: 6.2.4
+    baseUrl: http://localhost:8161/api/message
+    status: active
+  - name: ActiveMQ Jolokia Management API
+    namespace: activemq-jolokia
+    version: 6.2.4
+    baseUrl: http://localhost:8161/api/jolokia
+    status: active
+  resources:
+  - name: messages
+    api: activemq-rest
+    actions:
+    - send
+    - receive
+  - name: queues
+    api: activemq-rest
+    actions:
+    - send
+    - receive
+    - browse
+  - name: topics
+    api: activemq-rest
+    actions:
+    - publish
+    - subscribe
+  - name: mbeans
+    api: activemq-jolokia
+    actions:
+    - read
+  actions:
+  - name: send
+    httpMethod: POST
+    pattern: write
+  - name: receive
+    httpMethod: GET
+    pattern: read
+  - name: publish
+    httpMethod: POST
+    pattern: write
+  - name: subscribe
+    httpMethod: GET
+    pattern: read
+  - name: read
+    httpMethod: GET
+    pattern: read
+  schemas:
+    core:
+    - JolokiaResponse
+    - JolokiaError
+  parameters:
+    identifiers:
+    - destination
+    - mbean
+    - clientId
+    filters:
+    - type
+    - selector
+    - oneShot
+    - timeout
+  enums:
+    destinationTypes:
+    - queue
+    - topic
+  authentication:
+    schemes:
+    - name: basicAuth
+      type: http
+      scheme: basic
+capability:
+  workflows:
+  - name: ActiveMQ Messaging Workflow
+    file: capabilities/activemq-messaging.yaml
+    description: Unified messaging and monitoring capability for ActiveMQ.
+    apis:
+    - activemq-rest
+    toolCount: 3
+    personas:
+    - Application Developer
+    - Platform Operator
+  personas:
+  - id: app-developer
+    name: Application Developer
+    description: Developers integrating applications with ActiveMQ for 
+      asynchronous messaging.
+    workflows:
+    - activemq-messaging
+  - id: platform-operator
+    name: Platform Operator
+    description: Operators monitoring and managing ActiveMQ broker health and 
+      performance.
+    workflows:
+    - activemq-messaging
+  domains:
+  - Messaging
+  - Broker Management
+  - Monitoring
+  namespaces:
+  - name: activemq-rest
+    type: consumed
+    description: ActiveMQ REST and Jolokia API consumer namespace
+  - name: activemq-messaging-api
+    type: rest
+    port: 8080
+  - name: activemq-messaging-mcp
+    type: mcp
+    port: 9090
+  binds:
+  - ACTIVEMQ_USERNAME
+  - ACTIVEMQ_PASSWORD
+crossReference:
+- resource: messages
+  operations:
+  - send
+  - receive
+  workflows:
+  - activemq-messaging
+  personas:
+  - Application Developer
+- resource: mbeans
+  operations:
+  - read
+  workflows:
+  - activemq-messaging
+  personas:
+  - Platform Operator

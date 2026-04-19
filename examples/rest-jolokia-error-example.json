@@ -1,0 +1,6 @@
+{
+  "error_type": "java.lang.IllegalArgumentException",
+  "error": "No MBean found for pattern",
+  "status": 404,
+  "timestamp": 1718153645
+}

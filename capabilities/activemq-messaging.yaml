@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Apache ActiveMQ Messaging Workflow
+  description: Unified capability for Apache ActiveMQ messaging operations and 
+    broker management. Used by application developers and platform operators to 
+    send/receive messages and monitor broker health.
+  tags:
+  - Apache ActiveMQ
+  - Messaging
+  - Broker Management
+  - JMS
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVEMQ_USERNAME: ACTIVEMQ_USERNAME
+    ACTIVEMQ_PASSWORD: ACTIVEMQ_PASSWORD
+capability:
+  consumes:
+  - import: activemq-rest
+    location: ./shared/activemq-rest.yaml
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: activemq-messaging-api
+    description: Unified REST API for ActiveMQ messaging and management.
+    resources:
+    - path: /v1/messages
+      name: messages
+      description: Produce and consume messages.
+      operations:
+      - method: POST
+        name: send-message
+        description: Send a message to a queue or topic.
+        call: activemq-rest.send-message
+        with:
+          destination: rest.destination
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: receive-message
+        description: Receive a message from a queue or topic.
+        call: activemq-rest.receive-message
+        with:
+          destination: rest.destination
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management/mbeans/{mbean}
+      name: management
+      description: Monitor broker JMX attributes.
+      operations:
+      - method: GET
+        name: read-broker-metric
+        description: Read a broker JMX MBean attribute.
+        call: activemq-rest.read-mbean
+        with:
+          mbean: rest.mbean
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: activemq-messaging-mcp
+    transport: http
+    description: MCP server for AI-assisted ActiveMQ messaging and monitoring.
+    tools:
+    - name: send-message
+      description: Send a message to an ActiveMQ queue or topic.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: activemq-rest.send-message
+      with:
+        destination: tools.destination
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: receive-message
+      description: Receive a message from an ActiveMQ queue or topic.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: activemq-rest.receive-message
+      with:
+        destination: tools.destination
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-broker-metric
+      description: Read a JMX MBean attribute from the ActiveMQ broker for 
+        monitoring.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: activemq-rest.read-mbean
+      with:
+        mbean: tools.mbean
+      outputParameters:
+      - type: object
+        mapping: $.

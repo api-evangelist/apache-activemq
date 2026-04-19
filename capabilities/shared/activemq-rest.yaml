@@ -1,0 +1,167 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Apache ActiveMQ REST API
+  description: Shared per-API capability definition for Apache ActiveMQ REST 
+    messaging and Jolokia management API.
+  tags:
+  - Apache ActiveMQ
+  - Messaging
+  - REST
+  - JMS
+  - Management
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVEMQ_USERNAME: ACTIVEMQ_USERNAME
+    ACTIVEMQ_PASSWORD: ACTIVEMQ_PASSWORD
+capability:
+  consumes:
+  - type: http
+    namespace: activemq-rest
+    baseUri: http://localhost:8161/api
+    description: Apache ActiveMQ REST and Jolokia management API.
+    authentication:
+      type: basic
+      username: '{{ACTIVEMQ_USERNAME}}'
+      password: '{{ACTIVEMQ_PASSWORD}}'
+    resources:
+    - name: messages
+      path: /message
+      description: Produce and consume messages from queues and topics.
+      operations:
+      - name: send-message
+        method: POST
+        description: Send a message to a named destination.
+        inputParameters:
+        - name: destination
+          in: path
+          type: string
+          required: true
+        - name: type
+          in: query
+          type: string
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: receive-message
+        method: GET
+        description: Receive a message from a named destination.
+        inputParameters:
+        - name: destination
+          in: path
+          type: string
+          required: true
+        - name: type
+          in: query
+          type: string
+          required: false
+        - name: oneShot
+          in: query
+          type: boolean
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management
+      path: /jolokia
+      description: Jolokia JMX-HTTP bridge for broker management.
+      operations:
+      - name: read-mbean
+        method: GET
+        description: Read JMX MBean attributes for broker monitoring.
+        inputParameters:
+        - name: mbean
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8100
+    namespace: activemq-rest-api
+    resources:
+    - path: /v1/messages
+      name: messages
+      operations:
+      - method: POST
+        name: send-message
+        description: Send a message to a destination.
+        call: activemq-rest.send-message
+        with:
+          destination: rest.destination
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: receive-message
+        description: Receive a message from a destination.
+        call: activemq-rest.receive-message
+        with:
+          destination: rest.destination
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management/mbeans/{mbean}
+      name: management
+      operations:
+      - method: GET
+        name: read-mbean
+        description: Read broker MBean attribute.
+        call: activemq-rest.read-mbean
+        with:
+          mbean: rest.mbean
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9100
+    namespace: activemq-mcp
+    transport: http
+    tools:
+    - name: send-message
+      description: Send a message to an ActiveMQ queue or topic.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: activemq-rest.send-message
+      with:
+        destination: tools.destination
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: receive-message
+      description: Receive a message from an ActiveMQ queue or topic.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: activemq-rest.receive-message
+      with:
+        destination: tools.destination
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-broker-metric
+      description: Read a JMX MBean attribute from the ActiveMQ broker for 
+        monitoring.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: activemq-rest.read-mbean
+      with:
+        mbean: tools.mbean
+      outputParameters:
+      - type: object
+        mapping: $.

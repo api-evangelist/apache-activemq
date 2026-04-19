@@ -1,0 +1,159 @@
+extends: spectral:oas
+rules:
+  # INFO / METADATA
+  info-title-prefix:
+    description: API title must start with "Apache ActiveMQ"
+    severity: warn
+    given: "$.info.title"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Apache ActiveMQ"
+  info-description-required:
+    description: API must have a description of at least 50 characters.
+    severity: error
+    given: "$.info"
+    then:
+      field: description
+      function: truthy
+  info-version-required:
+    description: API info must include a version.
+    severity: error
+    given: "$.info"
+    then:
+      field: version
+      function: truthy
+  info-license-required:
+    description: API must declare an Apache 2.0 license.
+    severity: warn
+    given: "$.info"
+    then:
+      field: license
+      function: truthy
+
+  # SERVERS
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+  servers-https-only:
+    description: Server URLs should use HTTPS in production.
+    severity: info
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^http://"
+
+  # OPERATIONS
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    then:
+      field: summary
+      function: truthy
+  operation-summary-title-case:
+    description: Operation summaries must start with "Apache ActiveMQ".
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,options,head].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Apache ActiveMQ"
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    then:
+      field: description
+      function: truthy
+  operation-operationId-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    then:
+      field: operationId
+      function: truthy
+  operation-operationId-camelCase:
+    description: operationId must be camelCase.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,options,head].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+  operation-tags-required:
+    description: Every operation must have at least one tag.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    then:
+      field: tags
+      function: truthy
+
+  # PARAMETERS
+  parameter-description-required:
+    description: Every parameter must have a description.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,options,head].parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  # RESPONSES
+  response-success-required:
+    description: Every operation must define at least one 2xx response.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,options,head].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['204']
+  response-description-required:
+    description: Every response must have a description.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,options,head].responses[*]"
+    then:
+      field: description
+      function: truthy
+
+  # SECURITY
+  security-schemes-defined:
+    description: Security schemes must be defined in components.
+    severity: warn
+    given: "$.components"
+    then:
+      field: securitySchemes
+      function: truthy
+
+  # HTTP METHODS
+  get-no-request-body:
+    description: GET operations must not have a request body.
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: requestBody
+      function: falsy
+  delete-no-request-body:
+    description: DELETE operations should not have a request body.
+    severity: warn
+    given: "$.paths[*].delete"
+    then:
+      field: requestBody
+      function: falsy
+
+  # MICROCKS
+  operation-microcks-extension:
+    description: Operations should include x-microcks-operation extension for mock server compatibility.
+    severity: info
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: x-microcks-operation
+      function: truthy

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-activemq/refs/heads/main/json-structure/rest-jolokia-error-structure.json",
+  "name": "JolokiaError",
+  "description": "Jolokia error response envelope.",
+  "type": "object",
+  "properties": {
+    "error_type": {
+      "type": "string",
+      "description": "Error class name.",
+      "example": "java.lang.IllegalArgumentException"
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message.",
+      "example": "No MBean found for pattern"
+    },
+    "status": {
+      "type": "integer",
+      "description": "HTTP status code.",
+      "example": 404
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Unix timestamp of the error response.",
+      "example": 1718153645
+    }
+  }
+}
