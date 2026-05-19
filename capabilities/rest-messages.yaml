@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache ActiveMQ REST API — Messages
+  description: 'Apache ActiveMQ REST API — Messages. 4 operations. Lead operation: Apache ActiveMQ Send Message Using Destination
+    Parameter. Self-contained Naftiko capability covering one Apache Activemq business surface.'
+  tags:
+  - Apache Activemq
+  - Messages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_ACTIVEMQ_API_KEY: APACHE_ACTIVEMQ_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-messages
+    baseUri: http://localhost:8161/api
+    description: Apache ActiveMQ REST API — Messages business capability. Self-contained, no shared references.
+    resources:
+    - name: message
+      path: /message
+      operations:
+      - name: sendmessagetodestination
+        method: POST
+        description: Apache ActiveMQ Send Message Using Destination Parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: destination
+          in: query
+          type: string
+          description: Full destination URI in the form queue://name or topic://name.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: receivemessagefromdestination
+        method: GET
+        description: Apache ActiveMQ Receive Message Using Destination Parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: destination
+          in: query
+          type: string
+          description: Full destination URI in the form queue://name or topic://name.
+          required: true
+        - name: oneShot
+          in: query
+          type: boolean
+          description: If true, auto-close after receiving a single message.
+        - name: timeout
+          in: query
+          type: integer
+          description: Time in milliseconds to wait for a message.
+    - name: message-destination
+      path: /message/{destination}
+      operations:
+      - name: sendmessage
+        method: POST
+        description: Apache ActiveMQ Send Message to Destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: destination
+          in: path
+          type: string
+          description: Name of the queue or topic destination.
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: Destination type — queue or topic. Defaults to topic.
+        - name: clientId
+          in: query
+          type: string
+          description: Persistent consumer identifier for durable subscriptions.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: receivemessage
+        method: GET
+        description: Apache ActiveMQ Receive Message from Destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: destination
+          in: path
+          type: string
+          description: Name of the queue or topic destination.
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: Destination type — queue or topic. Defaults to topic.
+        - name: clientId
+          in: query
+          type: string
+          description: Persistent consumer identifier; no session cookie needed when provided.
+        - name: timeout
+          in: query
+          type: integer
+          description: Time in milliseconds to wait for a message to arrive before returning.
+        - name: oneShot
+          in: query
+          type: boolean
+          description: If true, the consumer is closed after receiving a single message.
+        - name: selector
+          in: header
+          type: string
+          description: JMS message selector expression for filtering messages.
+    authentication:
+      type: basic
+      username: '{{env.APACHE_ACTIVEMQ_USER}}'
+      password: '{{env.APACHE_ACTIVEMQ_PASS}}'
+  exposes:
+  - type: rest
+    namespace: rest-messages-rest
+    port: 8080
+    description: REST adapter for Apache ActiveMQ REST API — Messages. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/message
+      name: message
+      description: REST surface for message.
+      operations:
+      - method: POST
+        name: sendmessagetodestination
+        description: Apache ActiveMQ Send Message Using Destination Parameter
+        call: rest-messages.sendmessagetodestination
+        with:
+          destination: rest.destination
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: receivemessagefromdestination
+        description: Apache ActiveMQ Receive Message Using Destination Parameter
+        call: rest-messages.receivemessagefromdestination
+        with:
+          destination: rest.destination
+          oneShot: rest.oneShot
+          timeout: rest.timeout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/message/{destination}
+      name: message-destination
+      description: REST surface for message-destination.
+      operations:
+      - method: POST
+        name: sendmessage
+        description: Apache ActiveMQ Send Message to Destination
+        call: rest-messages.sendmessage
+        with:
+          destination: rest.destination
+          type: rest.type
+          clientId: rest.clientId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: receivemessage
+        description: Apache ActiveMQ Receive Message from Destination
+        call: rest-messages.receivemessage
+        with:
+          destination: rest.destination
+          type: rest.type
+          clientId: rest.clientId
+          timeout: rest.timeout
+          oneShot: rest.oneShot
+          selector: rest.selector
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-messages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache ActiveMQ REST API — Messages. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-activemq-send-message-using
+      description: Apache ActiveMQ Send Message Using Destination Parameter
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-messages.sendmessagetodestination
+      with:
+        destination: tools.destination
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-activemq-receive-message-using
+      description: Apache ActiveMQ Receive Message Using Destination Parameter
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-messages.receivemessagefromdestination
+      with:
+        destination: tools.destination
+        oneShot: tools.oneShot
+        timeout: tools.timeout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-activemq-send-message-destination
+      description: Apache ActiveMQ Send Message to Destination
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-messages.sendmessage
+      with:
+        destination: tools.destination
+        type: tools.type
+        clientId: tools.clientId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-activemq-receive-message-destination
+      description: Apache ActiveMQ Receive Message from Destination
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-messages.receivemessage
+      with:
+        destination: tools.destination
+        type: tools.type
+        clientId: tools.clientId
+        timeout: tools.timeout
+        oneShot: tools.oneShot
+        selector: tools.selector
+      outputParameters:
+      - type: object
+        mapping: $.
