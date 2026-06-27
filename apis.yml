@@ -39,9 +39,9 @@ apis:
     url: https://activemq.apache.org/components/classic/documentation/rest
   - type: OpenAPI
     url: openapi/apache-activemq-rest-openapi.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-management.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-messages.yaml
 - aid: apache-activemq:apache-activemq-jolokia-api
   name: Apache ActiveMQ Jolokia Management API
