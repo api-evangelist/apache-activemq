@@ -72,6 +72,12 @@ apis:
   - type: GettingStarted
     url: https://activemq.apache.org/components/classic/documentation/getting-started
 common:
+- type: VulnerabilityDisclosure
+  url: security/apache-activemq-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/apache-activemq-domain-security.yml
+- type: Authentication
+  url: authentication/apache-activemq-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/apache
 - type: GitHubRepository

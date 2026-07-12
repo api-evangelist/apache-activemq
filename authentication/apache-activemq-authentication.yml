@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/apache-activemq-rest-openapi.yaml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using broker credentials. Default credentials are admin/admin
+    but should be changed in production via jetty-realm.properties.
+  sources:
+  - openapi/apache-activemq-rest-openapi.yaml
