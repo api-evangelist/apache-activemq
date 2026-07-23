@@ -1,10 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Apache ActiveMQ REST API
-  description: >-
-    The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing
-    clients to produce and consume messages from queues and topics without a native JMS client.
-    It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.
+  title: Apache ActiveMQ REST Management Messages API
+  description: The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume messages from queues and topics without a native JMS client. It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.
   version: 6.2.4
   license:
     name: Apache 2.0
@@ -20,16 +17,12 @@ servers:
 tags:
 - name: Messages
   description: Operations for producing and consuming messages from queues and topics.
-- name: Management
-  description: Jolokia JMX-HTTP bridge for broker monitoring and management.
 paths:
   /message/{destination}:
     post:
       operationId: sendMessage
       summary: Apache ActiveMQ Send Message to Destination
-      description: >-
-        Sends a message to the specified queue or topic. The destination is specified
-        as a path parameter and the type (queue or topic) via a query parameter.
+      description: Sends a message to the specified queue or topic. The destination is specified as a path parameter and the type (queue or topic) via a query parameter.
       tags:
       - Messages
       parameters:
@@ -106,9 +99,7 @@ paths:
     get:
       operationId: receiveMessage
       summary: Apache ActiveMQ Receive Message from Destination
-      description: >-
-        Receives (consumes) a single message from the specified queue or topic.
-        Supports session-based and clientId-based consumption, message selectors, and timeouts.
+      description: Receives (consumes) a single message from the specified queue or topic. Supports session-based and clientId-based consumption, message selectors, and timeouts.
       tags:
       - Messages
       parameters:
@@ -157,7 +148,7 @@ paths:
         description: JMS message selector expression for filtering messages.
         schema:
           type: string
-          example: "test=2"
+          example: test=2
       responses:
         '200':
           description: Message received successfully.
@@ -197,9 +188,7 @@ paths:
     post:
       operationId: sendMessageToDestination
       summary: Apache ActiveMQ Send Message Using Destination Parameter
-      description: >-
-        Sends a message to the specified destination using a query parameter to supply the full destination URI
-        (e.g., queue://orders.input or topic://events.order).
+      description: Sends a message to the specified destination using a query parameter to supply the full destination URI (e.g., queue://orders.input or topic://events.order).
       tags:
       - Messages
       parameters:
@@ -252,9 +241,7 @@ paths:
     get:
       operationId: receiveMessageFromDestination
       summary: Apache ActiveMQ Receive Message Using Destination Parameter
-      description: >-
-        Receives a message from the specified destination using a query parameter.
-        Supports oneShot mode for one-time consumption.
+      description: Receives a message from the specified destination using a query parameter. Supports oneShot mode for one-time consumption.
       tags:
       - Messages
       parameters:
@@ -305,136 +292,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /jolokia/read/{mbean}:
-    get:
-      operationId: readMBeanAttribute
-      summary: Apache ActiveMQ Read MBean Attribute via Jolokia
-      description: >-
-        Reads JMX MBean attributes using the Jolokia HTTP bridge. Provides access to
-        broker metrics such as total consumer count, queue depths, message counts, and
-        other operational data.
-      tags:
-      - Management
-      parameters:
-      - name: mbean
-        in: path
-        required: true
-        description: >-
-          JMX ObjectName of the MBean to read, e.g.,
-          org.apache.activemq:type=Broker,brokerName=localhost
-        schema:
-          type: string
-          example: "org.apache.activemq:type=Broker,brokerName=localhost"
-      - name: attribute
-        in: path
-        required: false
-        description: >-
-          Optional attribute name to read from the MBean. If omitted, all attributes are returned.
-        schema:
-          type: string
-          example: TotalConsumerCount
-      - name: Origin
-        in: header
-        required: true
-        description: Origin header required by Jolokia CORS protection.
-        schema:
-          type: string
-          example: http://localhost
-      responses:
-        '200':
-          description: MBean attribute(s) returned successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JolokiaResponse'
-              examples:
-                ReadMBeanAttribute200Example:
-                  summary: Default readMBeanAttribute 200 response
-                  x-microcks-default: true
-                  value:
-                    request:
-                      type: read
-                      mbean: "org.apache.activemq:type=Broker,brokerName=localhost"
-                      attribute: TotalConsumerCount
-                    value: 3
-                    timestamp: 1718153645
-                    status: 200
-        '401':
-          description: Authentication required.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JolokiaError'
-        '404':
-          description: MBean or attribute not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JolokiaError'
-      security:
-      - basicAuth: []
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-      description: >-
-        HTTP Basic authentication using broker credentials. Default credentials are admin/admin
-        but should be changed in production via jetty-realm.properties.
-  schemas:
-    JolokiaResponse:
-      title: JolokiaResponse
-      description: Standard Jolokia response envelope for successful MBean read operations.
-      type: object
-      properties:
-        request:
-          type: object
-          description: Echo of the original request details.
-          properties:
-            type:
-              type: string
-              description: Jolokia operation type (read, write, exec, search).
-              example: read
-            mbean:
-              type: string
-              description: JMX ObjectName of the target MBean.
-              example: "org.apache.activemq:type=Broker,brokerName=localhost"
-            attribute:
-              type: string
-              description: Attribute name that was read.
-              example: TotalConsumerCount
-        value:
-          description: The attribute value returned. Type varies by attribute.
-          example: 3
-        timestamp:
-          type: integer
-          description: Unix timestamp of the response.
-          example: 1718153645
-        status:
-          type: integer
-          description: HTTP status code of the Jolokia operation.
-          example: 200
-    JolokiaError:
-      title: JolokiaError
-      description: Jolokia error response envelope.
-      type: object
-      properties:
-        error_type:
-          type: string
-          description: Error class name.
-          example: java.lang.IllegalArgumentException
-        error:
-          type: string
-          description: Error message.
-          example: No MBean found for pattern
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 404
-        timestamp:
-          type: integer
-          description: Unix timestamp of the error response.
-          example: 1718153645
+      description: HTTP Basic authentication using broker credentials. Default credentials are admin/admin but should be changed in production via jetty-realm.properties.
