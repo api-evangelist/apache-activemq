@@ -6,9 +6,22 @@ description: Apache ActiveMQ is an open-source, high-performance message broker 
   ActiveMQ provides features such as network of brokers, message persistence (KahaDB, JDBC), high availability, message scheduling,
   and a web console with REST and Jolokia management APIs.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apache-activemq.png
 tags:
 - AMQP
 - Apache
@@ -24,30 +37,12 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/apache-activemq/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: apache-activemq:apache-activemq-rest-api
-  name: Apache ActiveMQ REST API
-  description: The ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume
-    messages from queues and topics without a native JMS client. It supports sending messages via POST, receiving via GET,
-    and subscribing with client IDs for persistent consumption.
-  humanURL: https://activemq.apache.org/components/classic/documentation/rest
-  baseURL: http://localhost:8161/api/message
-  tags:
-  - Messaging
-  - REST
-  properties:
-  - type: Documentation
-    url: https://activemq.apache.org/components/classic/documentation/rest
-  - type: OpenAPI
-    url: openapi/apache-activemq-rest-openapi.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-management.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-messages.yaml
 - aid: apache-activemq:apache-activemq-jolokia-api
   name: Apache ActiveMQ Jolokia Management API
-  description: The Jolokia JMX-HTTP bridge API provides HTTP access to JMX metrics and management operations for the ActiveMQ
-    broker, enabling monitoring of broker health, queue depths, consumer counts, and other operational metrics without requiring
-    a JMX client.
+  description: >-
+    The Jolokia JMX-HTTP bridge API provides HTTP access to JMX metrics and management operations for
+    the ActiveMQ broker, enabling monitoring of broker health, queue depths, consumer counts, and other
+    operational metrics without requiring a JMX client.
   humanURL: https://activemq.apache.org/components/classic/documentation/web-console
   baseURL: http://localhost:8161/api/jolokia
   tags:
@@ -59,9 +54,10 @@ apis:
     url: https://activemq.apache.org/components/classic/documentation/web-console
 - aid: apache-activemq:apache-activemq-broker
   name: Apache ActiveMQ Broker
-  description: The ActiveMQ Classic broker provides high-performance asynchronous messaging through multiple protocol interfaces
-    including OpenWire, AMQP, STOMP, and MQTT. It includes a web-based management console, message persistence, network of
-    brokers for load distribution, and high availability configurations.
+  description: >-
+    The ActiveMQ Classic broker provides high-performance asynchronous messaging through multiple protocol
+    interfaces including OpenWire, AMQP, STOMP, and MQTT. It includes a web-based management console,
+    message persistence, network of brokers for load distribution, and high availability configurations.
   humanURL: https://activemq.apache.org/components/classic/documentation
   tags:
   - Broker
@@ -71,6 +67,38 @@ apis:
     url: https://activemq.apache.org/components/classic/documentation
   - type: GettingStarted
     url: https://activemq.apache.org/components/classic/documentation/getting-started
+- aid: apache-activemq:apache-activemq-management-api
+  name: Apache ActiveMQ Management API
+  description: Jolokia JMX-HTTP bridge for broker monitoring and management.
+  humanURL: https://activemq.apache.org/components/classic/documentation/rest
+  baseURL: http://localhost:8161/api/message
+  tags:
+  - Management
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-activemq-management-api-openapi.yml
+  - type: Documentation
+    url: https://activemq.apache.org/components/classic/documentation/rest
+  - type: X-NaftikoCapability
+    url: capabilities/rest-management.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-messages.yaml
+- aid: apache-activemq:apache-activemq-messages-api
+  name: Apache ActiveMQ Messages API
+  description: Operations for producing and consuming messages from queues and topics.
+  humanURL: https://activemq.apache.org/components/classic/documentation/rest
+  baseURL: http://localhost:8161/api/message
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-activemq-messages-api-openapi.yml
+  - type: Documentation
+    url: https://activemq.apache.org/components/classic/documentation/rest
+  - type: X-NaftikoCapability
+    url: capabilities/rest-management.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-messages.yaml
 common:
 - type: AgenticAccess
   url: agentic-access/apache-activemq-agentic-access.yml
