@@ -1,0 +1,440 @@
+openapi: 3.0.3
+info:
+  title: Apache ActiveMQ REST API
+  description: >-
+    The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing
+    clients to produce and consume messages from queues and topics without a native JMS client.
+    It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.
+  version: 6.2.4
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Apache ActiveMQ Community
+    url: https://activemq.apache.org/support
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: http://localhost:8161/api
+  description: Default local ActiveMQ broker API endpoint
+tags:
+- name: Messages
+  description: Operations for producing and consuming messages from queues and topics.
+- name: Management
+  description: Jolokia JMX-HTTP bridge for broker monitoring and management.
+paths:
+  /message/{destination}:
+    post:
+      operationId: sendMessage
+      summary: Apache ActiveMQ Send Message to Destination
+      description: >-
+        Sends a message to the specified queue or topic. The destination is specified
+        as a path parameter and the type (queue or topic) via a query parameter.
+      tags:
+      - Messages
+      parameters:
+      - name: destination
+        in: path
+        required: true
+        description: Name of the queue or topic destination.
+        schema:
+          type: string
+          example: TEST
+      - name: type
+        in: query
+        required: false
+        description: Destination type — queue or topic. Defaults to topic.
+        schema:
+          type: string
+          enum:
+          - queue
+          - topic
+          default: topic
+          example: queue
+      - name: clientId
+        in: query
+        required: false
+        description: Persistent consumer identifier for durable subscriptions.
+        schema:
+          type: string
+          example: consumerA
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  description: The message body content.
+                  example: Hello, ActiveMQ!
+          text/plain:
+            schema:
+              type: string
+              example: Hello, ActiveMQ!
+      responses:
+        '200':
+          description: Message sent successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+              examples:
+                SendMessage200Example:
+                  summary: Default sendMessage 200 response
+                  x-microcks-default: true
+                  value: ok
+        '401':
+          description: Authentication required. Provide valid credentials.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal broker error.
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - basicAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: receiveMessage
+      summary: Apache ActiveMQ Receive Message from Destination
+      description: >-
+        Receives (consumes) a single message from the specified queue or topic.
+        Supports session-based and clientId-based consumption, message selectors, and timeouts.
+      tags:
+      - Messages
+      parameters:
+      - name: destination
+        in: path
+        required: true
+        description: Name of the queue or topic destination.
+        schema:
+          type: string
+          example: TEST
+      - name: type
+        in: query
+        required: false
+        description: Destination type — queue or topic. Defaults to topic.
+        schema:
+          type: string
+          enum:
+          - queue
+          - topic
+          default: topic
+          example: queue
+      - name: clientId
+        in: query
+        required: false
+        description: Persistent consumer identifier; no session cookie needed when provided.
+        schema:
+          type: string
+          example: consumerA
+      - name: timeout
+        in: query
+        required: false
+        description: Time in milliseconds to wait for a message to arrive before returning.
+        schema:
+          type: integer
+          example: 5000
+      - name: oneShot
+        in: query
+        required: false
+        description: If true, the consumer is closed after receiving a single message.
+        schema:
+          type: boolean
+          example: true
+      - name: selector
+        in: header
+        required: false
+        description: JMS message selector expression for filtering messages.
+        schema:
+          type: string
+          example: "test=2"
+      responses:
+        '200':
+          description: Message received successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hello, ActiveMQ!
+              examples:
+                ReceiveMessage200Example:
+                  summary: Default receiveMessage 200 response
+                  x-microcks-default: true
+                  value: Hello, ActiveMQ!
+            application/json:
+              schema:
+                type: string
+        '204':
+          description: No message available within the timeout period.
+        '401':
+          description: Authentication required.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal broker error.
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - basicAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /message:
+    post:
+      operationId: sendMessageToDestination
+      summary: Apache ActiveMQ Send Message Using Destination Parameter
+      description: >-
+        Sends a message to the specified destination using a query parameter to supply the full destination URI
+        (e.g., queue://orders.input or topic://events.order).
+      tags:
+      - Messages
+      parameters:
+      - name: destination
+        in: query
+        required: true
+        description: Full destination URI in the form queue://name or topic://name.
+        schema:
+          type: string
+          example: queue://orders.input
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  description: The message body content.
+                  example: Order received
+          text/plain:
+            schema:
+              type: string
+              example: Order received
+      responses:
+        '200':
+          description: Message sent successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+              examples:
+                SendMessageToDestination200Example:
+                  summary: Default sendMessageToDestination 200 response
+                  x-microcks-default: true
+                  value: ok
+        '401':
+          description: Authentication required.
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - basicAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: receiveMessageFromDestination
+      summary: Apache ActiveMQ Receive Message Using Destination Parameter
+      description: >-
+        Receives a message from the specified destination using a query parameter.
+        Supports oneShot mode for one-time consumption.
+      tags:
+      - Messages
+      parameters:
+      - name: destination
+        in: query
+        required: true
+        description: Full destination URI in the form queue://name or topic://name.
+        schema:
+          type: string
+          example: queue://orders.input
+      - name: oneShot
+        in: query
+        required: false
+        description: If true, auto-close after receiving a single message.
+        schema:
+          type: boolean
+          example: true
+      - name: timeout
+        in: query
+        required: false
+        description: Time in milliseconds to wait for a message.
+        schema:
+          type: integer
+          example: 5000
+      responses:
+        '200':
+          description: Message received successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Order received
+              examples:
+                ReceiveMessageFromDestination200Example:
+                  summary: Default receiveMessageFromDestination 200 response
+                  x-microcks-default: true
+                  value: Order received
+        '204':
+          description: No message available.
+        '401':
+          description: Authentication required.
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - basicAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jolokia/read/{mbean}:
+    get:
+      operationId: readMBeanAttribute
+      summary: Apache ActiveMQ Read MBean Attribute via Jolokia
+      description: >-
+        Reads JMX MBean attributes using the Jolokia HTTP bridge. Provides access to
+        broker metrics such as total consumer count, queue depths, message counts, and
+        other operational data.
+      tags:
+      - Management
+      parameters:
+      - name: mbean
+        in: path
+        required: true
+        description: >-
+          JMX ObjectName of the MBean to read, e.g.,
+          org.apache.activemq:type=Broker,brokerName=localhost
+        schema:
+          type: string
+          example: "org.apache.activemq:type=Broker,brokerName=localhost"
+      - name: attribute
+        in: path
+        required: false
+        description: >-
+          Optional attribute name to read from the MBean. If omitted, all attributes are returned.
+        schema:
+          type: string
+          example: TotalConsumerCount
+      - name: Origin
+        in: header
+        required: true
+        description: Origin header required by Jolokia CORS protection.
+        schema:
+          type: string
+          example: http://localhost
+      responses:
+        '200':
+          description: MBean attribute(s) returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JolokiaResponse'
+              examples:
+                ReadMBeanAttribute200Example:
+                  summary: Default readMBeanAttribute 200 response
+                  x-microcks-default: true
+                  value:
+                    request:
+                      type: read
+                      mbean: "org.apache.activemq:type=Broker,brokerName=localhost"
+                      attribute: TotalConsumerCount
+                    value: 3
+                    timestamp: 1718153645
+                    status: 200
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JolokiaError'
+        '404':
+          description: MBean or attribute not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JolokiaError'
+      security:
+      - basicAuth: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication using broker credentials. Default credentials are admin/admin
+        but should be changed in production via jetty-realm.properties.
+  schemas:
+    JolokiaResponse:
+      title: JolokiaResponse
+      description: Standard Jolokia response envelope for successful MBean read operations.
+      type: object
+      properties:
+        request:
+          type: object
+          description: Echo of the original request details.
+          properties:
+            type:
+              type: string
+              description: Jolokia operation type (read, write, exec, search).
+              example: read
+            mbean:
+              type: string
+              description: JMX ObjectName of the target MBean.
+              example: "org.apache.activemq:type=Broker,brokerName=localhost"
+            attribute:
+              type: string
+              description: Attribute name that was read.
+              example: TotalConsumerCount
+        value:
+          description: The attribute value returned. Type varies by attribute.
+          example: 3
+        timestamp:
+          type: integer
+          description: Unix timestamp of the response.
+          example: 1718153645
+        status:
+          type: integer
+          description: HTTP status code of the Jolokia operation.
+          example: 200
+    JolokiaError:
+      title: JolokiaError
+      description: Jolokia error response envelope.
+      type: object
+      properties:
+        error_type:
+          type: string
+          description: Error class name.
+          example: java.lang.IllegalArgumentException
+        error:
+          type: string
+          description: Error message.
+          example: No MBean found for pattern
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 404
+        timestamp:
+          type: integer
+          description: Unix timestamp of the error response.
+          example: 1718153645

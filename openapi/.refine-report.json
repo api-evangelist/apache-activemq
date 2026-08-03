@@ -1,0 +1,16 @@
+{
+  "provider": "apache-activemq",
+  "sources": [
+    "apache-activemq-management-api-openapi.yml",
+    "apache-activemq-messages-api-openapi.yml"
+  ],
+  "outputs": [
+    "apache-activemq-management-api-openapi.yml",
+    "apache-activemq-messages-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
