@@ -79,10 +79,6 @@ apis:
     url: openapi/apache-activemq-management-api-openapi.yml
   - type: Documentation
     url: https://activemq.apache.org/components/classic/documentation/rest
-  - type: X-NaftikoCapability
-    url: capabilities/rest-management.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-messages.yaml
 - aid: apache-activemq:apache-activemq-messages-api
   name: Apache ActiveMQ Messages API
   description: Operations for producing and consuming messages from queues and topics.
@@ -95,11 +91,18 @@ apis:
     url: openapi/apache-activemq-messages-api-openapi.yml
   - type: Documentation
     url: https://activemq.apache.org/components/classic/documentation/rest
-  - type: X-NaftikoCapability
-    url: capabilities/rest-management.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-messages.yaml
 common:
+- type: IssueTracker
+  url: https://github.com/apache/activemq/issues
+- type: Releases
+  url: https://github.com/apache/activemq/releases
+- type: SecurityPolicy
+  url: https://github.com/apache/activemq/blob/main/SECURITY.md
+- type: CodeOfConduct
+  url: https://github.com/apache/.github/blob/main/.github/CODE_OF_CONDUCT.md
+- type: License
+  name: Apache-2.0
+  url: https://github.com/apache/activemq/blob/main/LICENSE
 - type: AgenticAccess
   url: agentic-access/apache-activemq-agentic-access.yml
 - type: VulnerabilityDisclosure
@@ -180,7 +183,7 @@ common:
   - name: Apache Karaf
     description: OSGi integration with Apache Karaf for modular enterprise deployments.
 - type: OpenAPI
-  url: openapi/apache-activemq-rest-openapi.yaml
+  url: openapi/_original/apache-activemq-rest-openapi.yaml
 - type: SpectralRules
   url: rules/apache-activemq-spectral-rules.yml
 - type: JSONSchema
