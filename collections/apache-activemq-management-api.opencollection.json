@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache ActiveMQ REST Management API",
+    "version": "6.2.4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache ActiveMQ Read MBean Attribute via Jolokia",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8161/api/jolokia/read/:mbean",
+            "headers": [
+              {
+                "name": "Origin",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mbean",
+                "value": "",
+                "type": "path",
+                "description": "JMX ObjectName of the MBean to read, e.g., org.apache.activemq:type=Broker,brokerName=localhost"
+              },
+              {
+                "name": "attribute",
+                "value": "",
+                "type": "path",
+                "description": "Optional attribute name to read from the MBean. If omitted, all attributes are returned."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Reads JMX MBean attributes using the Jolokia HTTP bridge. Provides access to broker metrics such as total consumer count, queue depths, message counts, and other operational data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

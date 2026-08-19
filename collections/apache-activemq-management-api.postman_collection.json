@@ -1,0 +1,300 @@
+{
+  "item": [
+    {
+      "id": "daa5e855-1c73-41e1-939d-9ad968cf3cde",
+      "name": "Management",
+      "description": {
+        "content": "Jolokia JMX-HTTP bridge for broker monitoring and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc2b5174-58b2-45f1-9ab7-839e93967160",
+          "name": "Apache ActiveMQ Read MBean Attribute via Jolokia",
+          "request": {
+            "name": "Apache ActiveMQ Read MBean Attribute via Jolokia",
+            "description": {
+              "content": "Reads JMX MBean attributes using the Jolokia HTTP bridge. Provides access to broker metrics such as total consumer count, queue depths, message counts, and other operational data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jolokia",
+                "read",
+                ":mbean"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mbean",
+                  "description": "(Required) JMX ObjectName of the MBean to read, e.g., org.apache.activemq:type=Broker,brokerName=localhost"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attribute",
+                  "description": "Optional attribute name to read from the MBean. If omitted, all attributes are returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Origin header required by Jolokia CORS protection.",
+                "key": "Origin",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "80e0b9a3-6d86-4fc2-9292-32eb1c88a1a4",
+              "name": "MBean attribute(s) returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jolokia",
+                    "read",
+                    ":mbean"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mbean",
+                      "description": "(Required) JMX ObjectName of the MBean to read, e.g., org.apache.activemq:type=Broker,brokerName=localhost"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute",
+                      "description": "Optional attribute name to read from the MBean. If omitted, all attributes are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Origin header required by Jolokia CORS protection.",
+                    "key": "Origin",
+                    "value": "http://localhost"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request\": {\n    \"type\": \"read\",\n    \"mbean\": \"org.apache.activemq:type=Broker,brokerName=localhost\",\n    \"attribute\": \"TotalConsumerCount\"\n  },\n  \"value\": 3,\n  \"timestamp\": 1718153645,\n  \"status\": 200\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11f7da14-521f-4950-b590-347105fe58f7",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jolokia",
+                    "read",
+                    ":mbean"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mbean",
+                      "description": "(Required) JMX ObjectName of the MBean to read, e.g., org.apache.activemq:type=Broker,brokerName=localhost"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute",
+                      "description": "Optional attribute name to read from the MBean. If omitted, all attributes are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Origin header required by Jolokia CORS protection.",
+                    "key": "Origin",
+                    "value": "http://localhost"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_type\": \"java.lang.IllegalArgumentException\",\n  \"error\": \"No MBean found for pattern\",\n  \"status\": 404,\n  \"timestamp\": 1718153645\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7aa9355-3d16-44e8-98ba-240d2f7ae4cb",
+              "name": "MBean or attribute not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jolokia",
+                    "read",
+                    ":mbean"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mbean",
+                      "description": "(Required) JMX ObjectName of the MBean to read, e.g., org.apache.activemq:type=Broker,brokerName=localhost"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute",
+                      "description": "Optional attribute name to read from the MBean. If omitted, all attributes are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Origin header required by Jolokia CORS protection.",
+                    "key": "Origin",
+                    "value": "http://localhost"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_type\": \"java.lang.IllegalArgumentException\",\n  \"error\": \"No MBean found for pattern\",\n  \"status\": 404,\n  \"timestamp\": 1718153645\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8161/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ebaf3e64-4620-4a23-b4f0-54c6aff1df9a",
+    "name": "Apache ActiveMQ REST Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume messages from queues and topics without a native JMS client. It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.\n\nContact Support:\n Name: Apache ActiveMQ Community",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1142 @@
+{
+  "item": [
+    {
+      "id": "6db5c1ec-0a15-4024-a648-f619e1928173",
+      "name": "Messages",
+      "description": {
+        "content": "Operations for producing and consuming messages from queues and topics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9ba0cc0-c75e-4962-8abc-d6e4ce5ae3c8",
+          "name": "Apache ActiveMQ Send Message to Destination",
+          "request": {
+            "name": "Apache ActiveMQ Send Message to Destination",
+            "description": {
+              "content": "Sends a message to the specified queue or topic. The destination is specified as a path parameter and the type (queue or topic) via a query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "message",
+                ":destination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "topic",
+                  "description": "Destination type — queue or topic. Defaults to topic."
+                },
+                {
+                  "disabled": false,
+                  "key": "clientId",
+                  "value": "<string>",
+                  "description": "Persistent consumer identifier for durable subscriptions."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "destination",
+                  "description": "(Required) Name of the queue or topic destination."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "body",
+                  "value": "<string>",
+                  "description": "The message body content."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "56d61aed-e727-4b55-9369-6a54ed250aef",
+              "name": "Message sent successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The message body content.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "Hello, ActiveMQ!"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "ok",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19c47f40-6397-402e-ba82-024888b26a40",
+              "name": "Authentication required. Provide valid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The message body content.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "Hello, ActiveMQ!"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc2daced-7ac9-4bc9-bbd9-7c541b85b6a7",
+              "name": "Internal broker error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The message body content.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "Hello, ActiveMQ!"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0006236-4080-4c5a-af28-c62fd1f3ea79",
+          "name": "Apache ActiveMQ Receive Message from Destination",
+          "request": {
+            "name": "Apache ActiveMQ Receive Message from Destination",
+            "description": {
+              "content": "Receives (consumes) a single message from the specified queue or topic. Supports session-based and clientId-based consumption, message selectors, and timeouts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "message",
+                ":destination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "topic",
+                  "description": "Destination type — queue or topic. Defaults to topic."
+                },
+                {
+                  "disabled": false,
+                  "key": "clientId",
+                  "value": "<string>",
+                  "description": "Persistent consumer identifier; no session cookie needed when provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "description": "Time in milliseconds to wait for a message to arrive before returning."
+                },
+                {
+                  "disabled": false,
+                  "key": "oneShot",
+                  "value": "<boolean>",
+                  "description": "If true, the consumer is closed after receiving a single message."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "destination",
+                  "description": "(Required) Name of the queue or topic destination."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "JMS message selector expression for filtering messages.",
+                "key": "selector",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "277aba20-22ac-40d6-a544-dddd3d4ec412",
+              "name": "Message received successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "JMS message selector expression for filtering messages.",
+                    "key": "selector",
+                    "value": "test=2"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6d42019-fce1-413a-8a1e-1084e5026e03",
+              "name": "No message available within the timeout period.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "JMS message selector expression for filtering messages.",
+                    "key": "selector",
+                    "value": "test=2"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "009363b1-f652-4a38-9391-5943b168d5a4",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "JMS message selector expression for filtering messages.",
+                    "key": "selector",
+                    "value": "test=2"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5fa6673-a2f8-4d4f-bbec-6b061a6df167",
+              "name": "Internal broker error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message",
+                    ":destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "queue"
+                    },
+                    {
+                      "key": "clientId",
+                      "value": "consumerA"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "destination",
+                      "description": "(Required) Name of the queue or topic destination."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "JMS message selector expression for filtering messages.",
+                    "key": "selector",
+                    "value": "test=2"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d24d80b0-8cd8-4faa-918f-fffa54f198ef",
+          "name": "Apache ActiveMQ Send Message Using Destination Parameter",
+          "request": {
+            "name": "Apache ActiveMQ Send Message Using Destination Parameter",
+            "description": {
+              "content": "Sends a message to the specified destination using a query parameter to supply the full destination URI (e.g., queue://orders.input or topic://events.order).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<string>",
+                  "description": "(Required) Full destination URI in the form queue://name or topic://name."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "body",
+                  "value": "<string>",
+                  "description": "The message body content."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d58c267b-19f6-43cb-8c55-a8262d932a83",
+              "name": "Message sent successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "destination",
+                      "value": "queue://orders.input"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The message body content.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "Order received"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "ok",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1de0e413-2a00-40c0-86de-5c8e5d956378",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "destination",
+                      "value": "queue://orders.input"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The message body content.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "Order received"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88f01bc4-d091-4b55-bd03-dc95afb9ea95",
+          "name": "Apache ActiveMQ Receive Message Using Destination Parameter",
+          "request": {
+            "name": "Apache ActiveMQ Receive Message Using Destination Parameter",
+            "description": {
+              "content": "Receives a message from the specified destination using a query parameter. Supports oneShot mode for one-time consumption.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<string>",
+                  "description": "(Required) Full destination URI in the form queue://name or topic://name."
+                },
+                {
+                  "disabled": false,
+                  "key": "oneShot",
+                  "value": "<boolean>",
+                  "description": "If true, auto-close after receiving a single message."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "description": "Time in milliseconds to wait for a message."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d0cc27f0-9515-48ff-b89b-489c2e9b5795",
+              "name": "Message received successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "destination",
+                      "value": "queue://orders.input"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Order received",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98dbcfa4-3121-4bd5-9fd3-f5ca89ba0b4e",
+              "name": "No message available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "destination",
+                      "value": "queue://orders.input"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71d223b3-db65-46d1-a078-d24d764785e8",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "destination",
+                      "value": "queue://orders.input"
+                    },
+                    {
+                      "key": "oneShot",
+                      "value": "true"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8161/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a5b5df4d-b2e6-4f8e-83d4-87fcfb923716",
+    "name": "Apache ActiveMQ REST Management Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume messages from queues and topics without a native JMS client. It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.\n\nContact Support:\n Name: Apache ActiveMQ Community",
+      "type": "text/plain"
+    }
+  }
+}

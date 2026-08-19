@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache ActiveMQ REST Management Messages API",
+    "version": "6.2.4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache ActiveMQ Receive Message from Destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8161/api/message/:destination",
+            "headers": [
+              {
+                "name": "selector",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "destination",
+                "value": "",
+                "type": "path",
+                "description": "Name of the queue or topic destination."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Destination type — queue or topic. Defaults to topic."
+              },
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "query",
+                "description": "Persistent consumer identifier; no session cookie needed when provided."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Time in milliseconds to wait for a message to arrive before returning."
+              },
+              {
+                "name": "oneShot",
+                "value": "",
+                "type": "query",
+                "description": "If true, the consumer is closed after receiving a single message."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Receives (consumes) a single message from the specified queue or topic. Supports session-based and clientId-based consumption, message selectors, and timeouts."
+        },
+        {
+          "info": {
+            "name": "Apache ActiveMQ Send Message to Destination",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8161/api/message/:destination",
+            "params": [
+              {
+                "name": "destination",
+                "value": "",
+                "type": "path",
+                "description": "Name of the queue or topic destination."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Destination type — queue or topic. Defaults to topic."
+              },
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "query",
+                "description": "Persistent consumer identifier for durable subscriptions."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "body",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Sends a message to the specified queue or topic. The destination is specified as a path parameter and the type (queue or topic) via a query parameter."
+        },
+        {
+          "info": {
+            "name": "Apache ActiveMQ Receive Message Using Destination Parameter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8161/api/message",
+            "params": [
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Full destination URI in the form queue://name or topic://name."
+              },
+              {
+                "name": "oneShot",
+                "value": "",
+                "type": "query",
+                "description": "If true, auto-close after receiving a single message."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Time in milliseconds to wait for a message."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Receives a message from the specified destination using a query parameter. Supports oneShot mode for one-time consumption."
+        },
+        {
+          "info": {
+            "name": "Apache ActiveMQ Send Message Using Destination Parameter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8161/api/message",
+            "params": [
+              {
+                "name": "destination",
+                "value": "",
+                "type": "query",
+                "description": "Full destination URI in the form queue://name or topic://name."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "body",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Sends a message to the specified destination using a query parameter to supply the full destination URI (e.g., queue://orders.input or topic://events.order)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
