@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Apache ActiveMQ REST Management API
   description: The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume messages from queues and topics without a native JMS client. It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.
@@ -85,6 +85,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    JolokiaError:
+      title: JolokiaError
+      description: Jolokia error response envelope.
+      type: object
+      properties:
+        error_type:
+          type: string
+          description: Error class name.
+          example: java.lang.IllegalArgumentException
+        error:
+          type: string
+          description: Error message.
+          example: No MBean found for pattern
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 404
+        timestamp:
+          type: integer
+          description: Unix timestamp of the error response.
+          example: 1718153645
     JolokiaResponse:
       title: JolokiaResponse
       description: Standard Jolokia response envelope for successful MBean read operations.
@@ -117,27 +138,6 @@ components:
           type: integer
           description: HTTP status code of the Jolokia operation.
           example: 200
-    JolokiaError:
-      title: JolokiaError
-      description: Jolokia error response envelope.
-      type: object
-      properties:
-        error_type:
-          type: string
-          description: Error class name.
-          example: java.lang.IllegalArgumentException
-        error:
-          type: string
-          description: Error message.
-          example: No MBean found for pattern
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 404
-        timestamp:
-          type: integer
-          description: Unix timestamp of the error response.
-          example: 1718153645
   securitySchemes:
     basicAuth:
       type: http

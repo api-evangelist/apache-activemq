@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Apache ActiveMQ REST Management Messages API
   description: The Apache ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume messages from queues and topics without a native JMS client. It also exposes a Jolokia JMX-HTTP bridge for broker management and monitoring.
