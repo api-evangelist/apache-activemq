@@ -215,8 +215,6 @@ common:
     description: Operational monitoring integration with RHQ for enterprise monitoring.
   - name: Apache Karaf
     description: OSGi integration with Apache Karaf for modular enterprise deployments.
-- type: OpenAPI
-  url: openapi/_original/apache-activemq-rest-openapi.yaml
 - type: SpectralRules
   url: rules/apache-activemq-spectral-rules.yml
 - type: JSONSchema
