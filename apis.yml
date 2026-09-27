@@ -46,7 +46,7 @@ tags:
 - Message Broker
 - Messaging
 - MQTT
-- Open-Source
+- Open Source
 - STOMP
 tags_raw:
 - AMQP
@@ -58,6 +58,7 @@ tags_raw:
 - MQTT
 - Open Source
 - STOMP
+- Open-Source
 created: '2026-03-16'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/apache-activemq/refs/heads/main/apis.yml
