@@ -1,21 +1,19 @@
-# Kin Score artifact — apache-activemq — 2026-08-27T123021
+# Kin Score artifact — apache-activemq — 2026-10-03T024842
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: apache-activemq
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T123021
-  composite: 31.8
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T024842
+  composite: 36.7
   band: thin
   facets:
-    discoverability: 64.8
-    contract_quality: 16.7
-    governance: 28.8
+    discoverability: 62.5
+    contract_quality: 17.0
+    contract_governance: 27.3
     operational_transparency: 36.8
     developer_ergonomics: 38.1
-    commercial_clarity: 26.3
-    contract_governance: 28.8
     access_clarity: 26.3
   agent_readiness:
     score: 30.6
@@ -40,10 +38,19 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  regulatory:
+    applies: true
+    regime: Horizontal (data, software, accessibility, platform)
+    regime_id: horizontal
+    score: 26.5
+    matched_via: fallback
+  open_source:
+    applies: true
+    score: 75.0
   provenance:
     agentic_access: derived
     contracts:
-      total: 2
-      derived: 2
+      total: 3
+      derived: 3
       coverage: 100.0
       callable: 0.0
