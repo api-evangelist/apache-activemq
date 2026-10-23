@@ -124,6 +124,8 @@ apis:
   - type: Documentation
     url: https://activemq.apache.org/components/classic/documentation/rest
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/apache-activemq/overview
 - type: Plans
   url: plans/apache-activemq-plans-pricing.yml
 - type: RateLimits
