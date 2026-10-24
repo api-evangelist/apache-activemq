@@ -1,9 +1,12 @@
 {
   "provider": "apache-activemq",
   "sources": [
+    "_original/apache-activemq-openapi.json",
     "_ae-authored/apache-activemq-rest-openapi.yaml"
   ],
   "outputs": [
+    "apache-activemq-queues-api-openapi.yml",
+    "apache-activemq-status-api-openapi.yml",
     "apache-activemq-management-api-openapi.yml",
     "apache-activemq-messages-api-openapi.yml"
   ],
@@ -11,9 +14,10 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apache-activemq-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "apache-activemq-rest-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+2 apis, 6 total)"
   ],
   "skipped": [
     "apache-activemq-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
