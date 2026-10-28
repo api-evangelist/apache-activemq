@@ -1,4 +1,4 @@
-# Apache ActiveMQ (apache-activemq)
+# Apache ActiveMQ
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,162 +66,163 @@
 
 Apache ActiveMQ is an open-source, high-performance message broker written in Java, developed by the Apache Software Foundation. It implements the Jakarta Messaging (JMS) API and supports multiple messaging protocols including AMQP, STOMP, MQTT, OpenWire, and HTTP/WebSocket, enabling reliable asynchronous messaging between distributed applications and microservices. ActiveMQ provides features such as network of brokers, message persistence (KahaDB, JDBC), high availability, message scheduling, and a web console with REST and Jolokia management APIs.
 
-**URL:** [https://activemq.apache.org/](https://activemq.apache.org/)
+**Areas:** AMQP · Apache · Java · JMS · Message Broker · Messaging · MQTT · Open Source · STOMP
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Apache ActiveMQ on APIs.io
 
-## Tags
+Everything profiled for Apache ActiveMQ is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/apache-activemq/](https://apis.io/providers/apache-activemq/)** — or go straight to one of the APIs or properties below.
 
- - AMQP, Apache, Java, JMS, Message Broker, Messaging, MQTT, Open Source, STOMP
+### APIs (4)
 
-## Timestamps
+- [Apache ActiveMQ Jolokia Management API](https://apis.io/apis/apache-activemq/apache-activemq-jolokia-api/) — The Jolokia JMX-HTTP bridge API provides HTTP access to JMX metrics and management operations for the ActiveMQ broker, enabling monitoring of broker health,…
+- [Apache ActiveMQ Broker](https://apis.io/apis/apache-activemq/apache-activemq-broker/) — The ActiveMQ Classic broker provides high-performance asynchronous messaging through multiple protocol interfaces including OpenWire, AMQP, STOMP, and MQTT.…
+- [Apache ActiveMQ Management API](https://apis.io/apis/apache-activemq/apache-activemq-management-api/) — Jolokia JMX-HTTP bridge for broker monitoring and management.
+- [Apache ActiveMQ Messages API](https://apis.io/apis/apache-activemq/apache-activemq-messages-api/) — Operations for producing and consuming messages from queues and topics.
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Apache ActiveMQ REST API
-The ActiveMQ REST API provides HTTP-based access to messaging operations, allowing clients to produce and consume messages from queues and topics without a native JMS client. It supports sending messages via POST, receiving via GET, and subscribing with client IDs for persistent consumption.
+#### Agentic access (1)
 
-**Human URL:** [https://activemq.apache.org/components/classic/documentation/rest](https://activemq.apache.org/components/classic/documentation/rest)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Apache Activemq Agentic Access](https://apis.io/agentic-access/apache-activemq/apache-activemq-agentic-access/)
 
- - Messaging, REST
+#### JSON Schema (2)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://activemq.apache.org/components/classic/documentation/rest)
-- [OpenAPI](openapi/apache-activemq-rest-openapi.yaml)
+- [JolokiaError](https://apis.io/schemas/apache-activemq/rest-jolokia-error/)
+- [JolokiaResponse](https://apis.io/schemas/apache-activemq/rest-jolokia-response/)
 
-### Apache ActiveMQ Jolokia Management API
-The Jolokia JMX-HTTP bridge API provides HTTP access to JMX metrics and management operations for the ActiveMQ broker, enabling monitoring of broker health, queue depths, consumer counts, and other operational metrics without requiring a JMX client.
+#### JSON Structure (2)
 
-**Human URL:** [https://activemq.apache.org/components/classic/documentation/web-console](https://activemq.apache.org/components/classic/documentation/web-console)
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Rest Jolokia Error Structure](https://apis.io/json-structure/apache-activemq/rest-jolokia-error-structure/)
+- [Rest Jolokia Response Structure](https://apis.io/json-structure/apache-activemq/rest-jolokia-response-structure/)
 
- - Management, Monitoring, JMX
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://activemq.apache.org/components/classic/documentation/web-console)
+- [Apache Activemq Rest Context](https://apis.io/jsonld/apache-activemq/apache-activemq-rest-context/)
 
-### Apache ActiveMQ Broker
-The ActiveMQ Classic broker provides high-performance asynchronous messaging through multiple protocol interfaces including OpenWire, AMQP, STOMP, and MQTT. It includes a web-based management console, message persistence, network of brokers for load distribution, and high availability configurations.
+#### Vocabulary (1)
 
-**Human URL:** [https://activemq.apache.org/components/classic/documentation](https://activemq.apache.org/components/classic/documentation)
+The provider's domain terms, defined.
 
-#### Tags
+- [Apache Activemq Vocabulary](https://apis.io/vocabularies/apache-activemq/apache-activemq-vocabulary/)
 
- - Broker, Messaging
+#### Examples (2)
 
-#### Properties
+Example requests and responses.
 
-- [Documentation](https://activemq.apache.org/components/classic/documentation)
-- [GettingStarted](https://activemq.apache.org/components/classic/documentation/getting-started)
+- [Rest Jolokia Error Example](https://apis.io/examples/apache-activemq/rest-jolokia-error-example/)
+- [Rest Jolokia Response Example](https://apis.io/examples/apache-activemq/rest-jolokia-response-example/)
 
-## Common Properties
+#### Collections (2)
 
-- [GitHubOrganization](https://github.com/apache)
-- [GitHubRepository](https://github.com/apache/activemq)
+Postman and Open Collection request collections.
+
+- [Apache ActiveMQ REST Management API](https://apis.io/collections/apache-activemq/open-apache-activemq-management-api/)
+- [Apache ActiveMQ REST Management Messages API](https://apis.io/collections/apache-activemq/open-apache-activemq-messages-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Apache ActiveMQ — jsonschema rules](https://apis.io/rules/apache-activemq/apache-activemq-jsonschema-spectral-rules/)
+- [Apache ActiveMQ API Rules](https://apis.io/rules/apache-activemq/apache-activemq-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Apache Activemq Authentication](https://apis.io/security/apache-activemq/apache-activemq-authentication/)
+- [Apache Activemq Domain Security](https://apis.io/security/apache-activemq/apache-activemq-domain-security/)
+- [Apache Activemq Vulnerability Disclosure](https://apis.io/security/apache-activemq/apache-activemq-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Apache Activemq Plans Pricing](https://apis.io/plans/apache-activemq/apache-activemq-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Apache Activemq Rate Limits](https://apis.io/rate-limits/apache-activemq/apache-activemq-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Apache Activemq Finops](https://apis.io/finops/apache-activemq/apache-activemq-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.apache.org/)
 - [Documentation](https://activemq.apache.org/)
-- [GettingStarted](https://activemq.apache.org/components/classic/documentation/getting-started)
-- [FAQ](https://activemq.apache.org/faq)
+- [Getting started](https://activemq.apache.org/components/classic/documentation/getting-started)
 - [Support](https://activemq.apache.org/support)
-- [TermsOfService](https://www.apache.org/licenses/)
-- [ChangeLog](https://activemq.apache.org/components/classic/download)
+- [Changelog](https://activemq.apache.org/components/classic/download)
+- [Terms of service](https://www.apache.org/licenses/)
+- [GitHub](https://github.com/apache)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Multi-Protocol Support | Supports AMQP, STOMP, MQTT, OpenWire, JMS, Jakarta Messaging, HTTP, and WebSocket protocols for broad client compatibility. |
-| Message Persistence | Provides KahaDB and JDBC-based message persistence options to ensure message durability across broker restarts. |
-| Network of Brokers | Enables distributed messaging topologies by linking multiple brokers in a network for load balancing and failover. |
-| High Availability | Supports shared storage and master-slave configurations for high availability deployments. |
-| Message Scheduling | Built-in message scheduling capabilities allow delayed or recurring message delivery. |
-| REST Messaging API | HTTP-based REST API for producing and consuming messages from queues and topics without native JMS clients. |
-| Jolokia Management API | JMX-over-HTTP bridge via Jolokia for broker monitoring and management. |
-| Web Console | HTML5 web-based management console accessible at /admin for queue and topic management, subscriber monitoring, and message browsing. |
-| Docker Support | Official Docker image apache/activemq-classic available on Docker Hub for containerized deployments. |
-| Embeddable Broker | ActiveMQ can be embedded directly into Java applications for in-process messaging. |
+**Kin Score 35.4** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 17.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 18.4 |
 
-| Name | Description |
-|------|-------------|
-| Microservices Messaging | Decouple microservices using asynchronous message queues and topics for event-driven architectures. |
-| Enterprise Integration | Connect disparate enterprise systems and applications using standard messaging protocols. |
-| IoT Messaging | Use MQTT protocol support for IoT device communication and telemetry data pipelines. |
-| Workload Distribution | Distribute work items across consumer pools using competing consumers on queues. |
-| Event Streaming | Publish events to topics and fan out to multiple subscriber applications. |
-| Legacy JMS Integration | Bridge legacy JMS-based applications with modern services using OpenWire and JMS API support. |
+**Agent readiness 28.7** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-| Name | Description |
-|------|-------------|
-| Spring Framework | Deep integration with Spring and Spring Boot via spring-boot-starter-activemq. |
-| Apache Camel | Native Apache Camel ActiveMQ component for enterprise integration patterns. |
-| Docker | Official Docker Hub image apache/activemq-classic for containerized deployments. |
-| Kubernetes | Deployable on Kubernetes using the official Docker image and StatefulSets. |
-| Hawtio | HTML5 management console integration via hawtio for advanced broker management. |
-| RHQ | Operational monitoring integration with RHQ for enterprise monitoring. |
-| Apache Karaf | OSGi integration with Apache Karaf for modular enterprise deployments. |
+**Regulatory alignment 26.5** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/apache-activemq/](https://apis.io/providers/apache-activemq/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Apache ActiveMQ REST API](openapi/apache-activemq-rest-openapi.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Apache ActiveMQ: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [Jolokia Response](json-schema/rest-jolokia-response-schema.json)
-- [Jolokia Error](json-schema/rest-jolokia-error-schema.json)
-
-### JSON Structure
-
-- [Jolokia Response Structure](json-structure/rest-jolokia-response-structure.json)
-- [Jolokia Error Structure](json-structure/rest-jolokia-error-structure.json)
-
-### JSON-LD
-
-- [Apache ActiveMQ REST Context](json-ld/apache-activemq-rest-context.jsonld)
-
-### Examples
-
-- [Jolokia Response Example](examples/rest-jolokia-response-example.json)
-- [Jolokia Error Example](examples/rest-jolokia-error-example.json)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Apache ActiveMQ REST API](capabilities/shared/activemq-rest.yaml) — 3 operations for messaging and broker management
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Apache ActiveMQ Messaging Workflow](capabilities/activemq-messaging.yaml) | ActiveMQ REST | 3 | Application Developer, Platform Operator |
-
-## Vocabulary
-
-- [Apache ActiveMQ Vocabulary](vocabulary/apache-activemq-vocabulary.yaml) — Unified taxonomy mapping 4 resources, 5 actions, 1 workflow, and 2 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Apache ActiveMQ Spectral Rules](rules/apache-activemq-spectral-rules.yml) — 19 rules across 7 categories enforcing Apache ActiveMQ API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** info@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/apache-activemq/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
